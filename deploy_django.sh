@@ -27,15 +27,15 @@ source venv/bin/activate
 pip install django gunicorn
 
 # Update ALLOWED_HOSTS in the settings.py file
-# SETTINGS_FILE="$PROJECT_PATH/$PROJECT_NAME/settings.py"
-# if grep -q "ALLOWED_HOSTS" "$SETTINGS_FILE"; then
-#     echo "Updating ALLOWED_HOSTS in $SETTINGS_FILE"
-#     # Use sed to add the server IP or domain to the ALLOWED_HOSTS list
-#     sed -i "/ALLOWED_HOSTS/c\ALLOWED_HOSTS = ['$SERVER_IP_OR_DOMAIN']" "$SETTINGS_FILE"
-# else
-#     echo "ALLOWED_HOSTS not found in $SETTINGS_FILE. Exiting..."
-#     exit 1
-# fi
+SETTINGS_FILE="$PROJECT_PATH/$PROJECT_NAME/settings.py"
+if grep -q "ALLOWED_HOSTS" "$SETTINGS_FILE"; then
+    echo "Updating ALLOWED_HOSTS in $SETTINGS_FILE"
+    # Use sed to add the server IP or domain to the ALLOWED_HOSTS list
+    sed -i "/ALLOWED_HOSTS/c\ALLOWED_HOSTS = ['$SERVER_IP_OR_DOMAIN']" "$SETTINGS_FILE"
+else
+    echo "ALLOWED_HOSTS not found in $SETTINGS_FILE. Exiting..."
+    exit 1
+fi
 
 # Collect static files (if applicable)
 python manage.py collectstatic --noinput
