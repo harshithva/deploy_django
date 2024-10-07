@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#One file that does everything
+
 # Check if user provided all required arguments
 if [ "$#" -ne 3 ]; then
     echo "Usage: ./deploy_django.sh <project_path> <project_name> <server_ip_or_domain>"
